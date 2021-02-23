@@ -32,14 +32,14 @@ public class TestHomePage extends FillComponent{
 
         //Verify OM-OSS link
         driver.findElement(By.xpath(omOss)).click();
-        actualTxt = driver.findElement(By.xpath("//*[@id=\"page\"]/div/div[2]/div[2]/div[2]/div/h1")).getText();
+        actualTxt = driver.findElement(By.xpath("//*[@id=\"page\"]/div/div/div[2]/div[2]/div[1]/div[1]/div[1]/h4")).getText();
 
         assertEquals(driver.getCurrentUrl(),"https://www.iths.se/om-oss/");
-        assertEquals("Hos oss startar din IT-karriär",actualTxt);
+        assertEquals("Om oss",actualTxt);
 
         //Verify NYHETER link
         driver.findElement(By.xpath(nyheter)).click();
-        actualTxt = driver.findElement(By.xpath("//*[@id=\"main\"]/div[1]/h1")).getText();
+        actualTxt = driver.findElement(By.xpath("//*[@id=\"main\"]/div[2]/h1")).getText();
 
         assertEquals(driver.getCurrentUrl(),"https://www.iths.se/nyheter/");
         assertEquals("Nyheter",actualTxt);
@@ -51,28 +51,35 @@ public class TestHomePage extends FillComponent{
     @Test
     public void testHomePageUttbildBtn() {
         //Verify YH-utbildningar button
+        goToHomePage();
         driver.findElement(By.xpath(yhUttbild)).click();
         String actualTxt = driver.findElement(By.xpath("//*[@id=\"main\"]/div/h1")).getText();
 
-        assertEquals(driver.getCurrentUrl(),"https://www.iths.se/kurstyp/yh-utbildning/");
-        assertEquals("Våra YH-utbildningar",actualTxt);
+        assertEquals(driver.getCurrentUrl(), "https://www.iths.se/kurstyp/yh-utbildning/");
+        assertEquals("Våra YH-utbildningar", actualTxt);
+    }
 
-        //To see find the next button need to start from home page
+    @Test
+    public void testHomePageDistansBtn(){
         goToHomePage();
 
         //Verify Distansutbildningar button
         driver.findElement(By.xpath(distansUttbild)).click();
-        actualTxt = driver.findElement(By.xpath("//*[@id=\"main\"]/div/h1")).getText();
+        String actualTxt = driver.findElement(By.xpath("//*[@id=\"main\"]/div/h1")).getText();
 
         assertEquals(driver.getCurrentUrl(),"https://www.iths.se/kurstyp/distansutbildning/");
         assertEquals("Våra distansutbildningar",actualTxt);
+    }
+        //To see find the next button need to start from home page
 
+    @Test
+    public void testHomePageAllUtbBtn(){
         //To see find the next button need to start from home page
         goToHomePage();
 
         //Verify Alla utbildningar button
         driver.findElement(By.xpath(allUttbild)).click();
-        actualTxt = driver.findElement(By.xpath("//*[@id=\"main\"]/div/h1")).getText();
+        String actualTxt = driver.findElement(By.xpath("//*[@id=\"main\"]/div/h1")).getText();
 
         assertEquals(driver.getCurrentUrl(),"https://www.iths.se/courses/");
         assertEquals("Utbildningar",actualTxt);
@@ -84,7 +91,7 @@ public class TestHomePage extends FillComponent{
     public void testSwitchToFB(){
 
         String mainWindow = driver.getWindowHandle();
-        driver.findElement(By.cssSelector("#footer-container > div > div.social-media > a:nth-child(2) > i")).click();
+        driver.findElement(By.cssSelector("#footer-container > div > div.row.footer-contact > div.col-2.social-media > div > a:nth-child(1) > i")).click();
         driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL+"t");
         driver.get("https://www.facebook.com/ITHogskolan?ref=hl");
 
